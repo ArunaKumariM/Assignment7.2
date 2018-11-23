@@ -1,0 +1,66 @@
+---
+title: "7.2assignment"
+author: "Aruna"
+date: "23 November 2018"
+output: word_document
+---
+```{r}
+#Assignment 7.2
+
+#1.  Wtite a program to create barplots for all the categorical columns in mtcars
+library(readr)
+mtcarscopy <- read_csv("F:/R Notes/29Sep/mtcarscopy.csv")
+View(mtcarscopy)
+
+sapply(mtcarscopy,class)
+
+par(mfcol=c(2,3))
+for (col in 1:ncol(mtcarscopy)) 
+{
+  if(is.integer(mtcarscopy[[col]])=="TRUE")
+  {
+    boxplot(mtcarscopy[,col],type='l',
+            main=paste("bloxplot of mtCars : ",names(mtcarscopy[col])),
+            xlab=names(mtcarscopy[col]),
+            type="l",
+            col = "blue")
+  }  else{NULL}
+}
+
+
+
+par(mfcol=c(1,1))
+```
+
+```{r}
+#2. create a scatter plot matrix by gear types in mtcars dataset
+
+install.packages("car")
+library(car)
+scatterplotMatrix(~mpg + disp + drat + wt | gear, data = mtcars, main = "Three gears Options")
+```
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
